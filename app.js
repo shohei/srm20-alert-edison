@@ -1,7 +1,10 @@
 var m = require('mraa'); 
+var exec = require('child_process').exec;
 console.log('MRAA Version: ' + m.getVersion()); 
 var prev;
 var current;
+
+configPullmode();
 
 var myDigitalPin = new m.Gpio(6); 
 myDigitalPin.dir(m.DIR_IN); 
@@ -20,7 +23,6 @@ function periodicActivity() {
 }
 
 function postToSlack(){
-	var exec = require('child_process').exec;
 	exec('./slackpost.sh "Ooops! I\'ve got an emergency stop!"', function callback(error, stdout, stderr){
 		console.log(error);
 		console.log(stdout);
@@ -28,4 +30,10 @@ function postToSlack(){
 	});
 }
 
-
+function configPullmode(){
+        exec('./configuration.sh', function callback(error, stdout, stderr){
+                console.log(error);
+                console.log(stdout);
+                console.log(stderr);
+        });
+}
