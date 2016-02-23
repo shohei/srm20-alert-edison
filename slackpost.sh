@@ -17,7 +17,7 @@ fi
 # channel info
 
 CHANNELS_RESPONSE=$(curl "https://slack.com/api/$API_TYPE.list?token=$TOKEN")
-CHANNEL_ID=$(echo $CHANNELS_RESPONSE | jq ".${API_TYPE}[]" | jq "if .name == \"$CHANNEL\" then .id else null end" -M -c -r | grep -v null)
+CHANNEL_ID=$(echo $CHANNELS_RESPONSE | /usr/local/bin/jq ".${API_TYPE}[]" | /usr/local/bin/jq "if .name == \"$CHANNEL\" then .id else null end" -M -c -r | grep -v null)
 
 # post message
 

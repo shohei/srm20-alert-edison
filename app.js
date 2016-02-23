@@ -1,4 +1,4 @@
-var m = require('mraa'); 
+var m = require('/usr/lib/node_modules/mraa'); 
 var exec = require('child_process').exec;
 console.log('MRAA Version: ' + m.getVersion()); 
 var prev;
@@ -23,7 +23,8 @@ function periodicActivity() {
 }
 
 function postToSlack(){
-	exec('./slackpost.sh "Ooops! I\'ve got an emergency stop!"', function callback(error, stdout, stderr){
+	console.log('posting to slack');	
+	exec('/home/root/srm20/slackpost.sh "Ooops! I\'ve got an emergency stop!"', function callback(error, stdout, stderr){
 		console.log(error);
 		console.log(stdout);
 		console.log(stderr);
@@ -31,7 +32,8 @@ function postToSlack(){
 }
 
 function configPullmode(){
-        exec('./configuration.sh', function callback(error, stdout, stderr){
+	console.log('configure pulldown');	
+        exec('/home/root/srm20/configuration.sh', function callback(error, stdout, stderr){
                 console.log(error);
                 console.log(stdout);
                 console.log(stderr);
