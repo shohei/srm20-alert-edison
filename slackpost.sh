@@ -1,7 +1,7 @@
 TOKEN="xoxp-4912017708-4912017712-22613958018-dd398f0293"
 CHANNEL="srm20_2"
 MESSAGE="ping message from edison"
-NICK="edison"
+NICK="Edison-on-SRM-20"
 IS_PRIVATE=0
 
 if [ $# -eq 1 ]; then

@@ -2,18 +2,17 @@ var m = require('mraa');
 console.log('MRAA Version: ' + m.getVersion()); 
 var prev;
 var current;
-prev =  myDigitalPin.read(); 
 
 var myDigitalPin = new m.Gpio(6); 
 myDigitalPin.dir(m.DIR_IN); 
-myDigitalPin.mode(m.MODE_PULLUP); 
 
+prev =  myDigitalPin.read(); 
 periodicActivity(); 
 
 function periodicActivity() {
   var current =  myDigitalPin.read(); 
   console.log('Gpio is ' + current); 
-  if(current==0&&prev==1){
+  if(current==1&&prev==0){
 	postToSlack();
   }	
   setTimeout(periodicActivity,1000); 
@@ -22,7 +21,7 @@ function periodicActivity() {
 
 function postToSlack(){
 	var exec = require('child_process').exec;
-	exec('./slackpost.sh "Whooa! I\'ve got an emergency stop!"', function callback(error, stdout, stderr){
+	exec('./slackpost.sh "Ooops! I\'ve got an emergency stop!"', function callback(error, stdout, stderr){
 		console.log(error);
 		console.log(stdout);
 		console.log(stderr);
